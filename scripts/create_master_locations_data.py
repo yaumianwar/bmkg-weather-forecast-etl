@@ -11,11 +11,12 @@ load_dotenv()
 CLICKHOUSE_PASSWORD = os.getenv('CLICKHOUSE_PASSWORD')
 CLICKHOUSE_USER = os.getenv('CLICKHOUSE_USER')
 CLICKHOUSE_DB = os.getenv('CLICKHOUSE_DB')
+CLICKHOUSE_HOST = os.getenv('CLICKHOUSE_HOST')
 
 def get_clickhouse_connection():
     
     try:
-        client = clickhouse_connect.get_client(host='localhost', username=CLICKHOUSE_USER, password=CLICKHOUSE_PASSWORD, database=CLICKHOUSE_DB)
+        client = clickhouse_connect.get_client(host=CLICKHOUSE_HOST, username=CLICKHOUSE_USER, password=CLICKHOUSE_PASSWORD, database=CLICKHOUSE_DB)
 
         return client
     
