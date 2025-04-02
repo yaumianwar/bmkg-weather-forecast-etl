@@ -8,5 +8,5 @@ USER airflow
 
 ADD requirements.txt .
 RUN pip install --upgrade pip setuptools wheel
-RUN pip install apache-airflow-providers-clickhouse
+RUN pip install airflow-provider-clickhouse
 RUN pip install apache-airflow==${AIRFLOW_VERSION} -r requirements.txt
