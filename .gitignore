@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.flaskenv
+.ipynb_checkpoints/
+.DS_Store
+venv/
+env/
+.venv/
+*.ipynb
+*.csv
+logs/
+plugins/
