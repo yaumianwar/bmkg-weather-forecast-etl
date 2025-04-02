@@ -32,7 +32,7 @@ git clone https://github.com/yaumianwar/bmkg-weather-forecast-etl.git
 cd bmkg-weather-forecast-etl
 ```
 
-Setup virtualenvironment
+Setup virtual environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
