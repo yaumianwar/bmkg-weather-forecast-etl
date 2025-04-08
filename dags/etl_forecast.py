@@ -20,7 +20,7 @@ def parse_datetime(datetime_str):
 # Instantiate a DAG with @dag operator
 @dag(
     start_date=datetime(2025, 3, 30),
-    schedule="30 1,13 * * *", # run twice a day at 01.30 UTC and 13.30 UTC
+    schedule="30 2,14 * * *", # run twice a day at 02.30 UTC and 14.30 UTC
     catchup=False,
     tags=["etl", "forecast"],
 )
@@ -32,7 +32,7 @@ def etl_forecast():
         
         # get forecasts data
         data = get_forecasts()
-        
+
         return data
     
     @task()
