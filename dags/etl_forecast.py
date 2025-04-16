@@ -20,7 +20,7 @@ def parse_datetime(datetime_str):
 # Instantiate a DAG with @dag operator
 @dag(
     start_date=datetime(2025, 3, 30),
-    schedule="30 2,14 * * *", # run twice a day at 02.30 UTC and 14.30 UTC
+    schedule="30 3,15 * * *", # run twice a day at 03.30 UTC and 15.30 UTC
     catchup=False,
     tags=["etl", "forecast"],
 )
