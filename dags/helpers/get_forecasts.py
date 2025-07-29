@@ -1,5 +1,5 @@
 import requests
-
+import time
 from helpers.db_connect import get_clickhouse_connection
 
 
@@ -12,7 +12,8 @@ def get_forecasts():
     
 
     # get location codes from master location
-    result = client.query('select adm3 from master_locations group by adm3')
+    parameters = {'adm3': '73.02.02'}
+    result = client.query('select adm4 from master_locations where adm3 = %(adm3)s group by adm4', parameters=parameters)
     location_codes = [list(i)[0] for i in result.result_rows]
 
     final_forecasts_data = []
@@ -20,8 +21,14 @@ def get_forecasts():
     # get forecasts data for each sub-district using location code (district/adm3)
     for location_code in location_codes:
         # make api request to get forecast data using location code (district/adm3)
-        response = requests.get("https://api.bmkg.go.id/publik/prakiraan-cuaca?adm3={}".format(location_code))
-        response_data = response.json()['data']
+        print("Fetching forecast data for location code: {}".format(location_code))
+        response = requests.get("https://api.bmkg.go.id/publik/prakiraan-cuaca?adm4={}".format(location_code))
+
+        try:
+            response_data = response.json()['data']
+        except:
+            print("Error fetching data for location code: {}".format(location_code))
+            continue
 
         # iterate response data. First iteration is for each sub-district
         for data in response_data:
@@ -43,6 +50,8 @@ def get_forecasts():
 
                 # add forecast data
                 final_forecasts_data.extend(forecast_data)
+        
+        time.sleep(2) 
 
 
     return final_forecasts_data
